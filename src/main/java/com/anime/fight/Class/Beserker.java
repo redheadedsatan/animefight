@@ -47,7 +47,7 @@ public class Beserker extends FighterBase {
             }
         }
         else {
-                
+
             }
 
 
