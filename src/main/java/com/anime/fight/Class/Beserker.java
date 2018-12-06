@@ -23,7 +23,7 @@ public class Beserker extends FighterBase {
 
     public void logic(FighterBase[] targets) {
         FighterBase target = findCloseEnemy(targets);
-        double diss = position.distance(target);
+        double diss = position.distance(target.getPosition());
         if (diss <= baseRange && (System.currentTimeMillis() - lastAttackTime) == attackSpeed)
         {
             if (System.currentTimeMillis() - lastAbilltyTime == abiltyColdown) {
