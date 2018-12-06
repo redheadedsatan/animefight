@@ -60,6 +60,18 @@ public abstract class FighterBase implements FighterInterface
         else
             hp -= damage;
     }
+    public final FighterBase findCloseEnemy(FighterBase[] enemy)
+    {
+        FighterBase close= enemy[0];
+        double minDistence = position.distance(enemy[0].position);
+        for (int i = 1; i < enemy.length;i++) {
+            if (minDistence > position.distance(enemy[i].position)) {
+                minDistence = position.distance(enemy[i].position);
+                close = enemy[i];
+            }
+        }
+        return close;
+    }
     public final void basicAttack(FighterBase target)
     {
         Random r = new Random();
