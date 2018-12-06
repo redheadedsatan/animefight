@@ -1,7 +1,8 @@
 package com.anime.fight.Class;
 
 import com.anime.fight.Class.Base.FighterBase;
-import jdk.nashorn.internal.objects.annotations.Getter;
+import lombok.Getter;
+
 
 public class Beserker extends FighterBase {
 
@@ -19,21 +20,10 @@ public class Beserker extends FighterBase {
         basicAttack(target);
         basicAttack(target);
     }
-    public FighterBase findCloseEnemy(FighterBase[] enemy)
-    {
-        FighterBase close= targets[0];
-        int minDistence = position.distance(targets[0].position);
-        for (int i = 1; i < targets.length;i++) {
-            if (minDistence > position.distance(targets[i].position)) {
-                minDistence = position.distance(targets[i].position);
-                close = targets[i];
-            }
-        }
-        return close;
-    }
+
     public void logic(FighterBase[] targets) {
         FighterBase target = findCloseEnemy(targets);
-        double diss = position.distance(target.position);
+        double diss = position.distance(target);
         if (diss <= baseRange && (System.currentTimeMillis() - lastAttackTime) == attackSpeed)
         {
             if (System.currentTimeMillis() - lastAbilltyTime == abiltyColdown) {
