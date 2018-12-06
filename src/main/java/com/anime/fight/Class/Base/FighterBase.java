@@ -8,11 +8,18 @@ import java.util.Random;
 public abstract class FighterBase implements FighterInterface {
 
     private final double defenceMultiplayer = 10;
-
+    @Getter
+    protected double lastAttackTime;
+    @Getter
+    protected double lastAbilltyTime;
+    @Getter
+    protected double abiltyColdown;
     @Getter
     protected Point position;
     @Getter
     protected double movmentSpeed;
+    @Getter
+    protected double attackSpeed;
     @Getter
     protected int team;
 
@@ -22,6 +29,8 @@ public abstract class FighterBase implements FighterInterface {
     protected double hp;
     @Getter
     protected double baseDamage;
+    @Getter
+    protected double baseRange;
     @Getter
     protected double SelfminimumDamage;
     @Getter
