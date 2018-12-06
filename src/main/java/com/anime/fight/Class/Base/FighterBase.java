@@ -5,7 +5,8 @@ import lombok.Getter;
 import java.awt.*;
 import java.util.Random;
 
-public abstract class FighterBase implements FighterInterface {
+public abstract class FighterBase implements FighterInterface
+{
 
     private final double defenceMultiplayer = 10;
     @Getter
