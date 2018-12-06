@@ -14,5 +14,5 @@ public class Camera {
     @Setter
     private double horizontalSpeed = 0;
 
-    private OnFrame
+    //private OnFrame
 }
