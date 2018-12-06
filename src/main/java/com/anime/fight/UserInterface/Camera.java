@@ -1,11 +1,12 @@
 package com.anime.fight.UserInterface;
 
+import com.anime.fight.event.BasicEvents;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
 
-public class Camera {
+public class Camera implements BasicEvents {
     @Getter
     private Point position = new Point(0,0);
 
@@ -14,5 +15,8 @@ public class Camera {
     @Setter
     private double horizontalSpeed = 0;
 
-    private OnFrame
+    public void OnFrame()
+    {
+
+    }
 }
