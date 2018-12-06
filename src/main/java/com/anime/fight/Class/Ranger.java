@@ -17,6 +17,6 @@ public class Ranger extends FighterBase {
         x = 2*(position.getX() - target.position.getX())/(Math.abs(position.getX() - target.position.getX()));
         y = 2*(position.getY() - target.position.getY())/(Math.abs(position.getY() - target.position.getY()));
         int m = (position.getY() - target.position.getY())/Math.abs(position.getX() - target.position.getX());
-
+        
     }
 }
