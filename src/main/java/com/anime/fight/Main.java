@@ -1,5 +1,6 @@
 package com.anime.fight;
 
+import com.anime.fight.UserInterface.Camera;
 import com.anime.fight.event.BasicEvents;
 import org.reflections.Reflections;
 
@@ -7,11 +8,9 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
-        Reflections reflections = new Reflections("com.mycompany");
-        Set<Class<? extends BasicEvents>> classes = reflections.getSubTypesOf(BasicEvents.class);
+        BasicEvents a = new BasicEvents() {
 
-        for (Class<? extends BasicEvents> b : classes){
-            System.out.println(b);
-        }
+        };
+        a.OnFrame();
     }
 }
