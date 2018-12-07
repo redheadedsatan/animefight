@@ -1,25 +1,20 @@
-
 package com.anime.fight.Class;
 
 import com.anime.fight.Class.Base.FighterBase;
-import lombok.Getter;
 
-
-public class Beserker extends FighterBase {
-
-    @Getter
-    protected double SelfDmgMinimum = 2;
-
+public class Necromancer extends FighterBase {
+    private int SkeltonNum = 0;
     public void ability(FighterBase target) {
-        double selfDmg = hpMax*0.05;
-        if (SelfDmgMinimum > selfDmg) { selfDmg = SelfDmgMinimum; }
-        hp -= selfDmg;
-        if (hp <= 0)
+        for (int i = -2; i <= 2;i+=4)
         {
-            hp = 1;
+            for (int j = -2; j <= 2; j+=4){
+                if(SkeltonNum < 4) {
+                    Skeleton a = new Skeleton();
+                    SkeltonNum++;
+                }
+            }
         }
-        basicAttack(target);
-        basicAttack(target);
+
     }
 
     public void logic(FighterBase[] targets) {
@@ -27,7 +22,7 @@ public class Beserker extends FighterBase {
         double diss = position.distance(target.getPosition());
         if (diss <= baseRange && (System.currentTimeMillis() - lastAttackTime) == attackSpeed)
         {
-            if (System.currentTimeMillis() - lastAbilltyTime == abiltyColdown) {
+            if (System.currentTimeMillis() - lastAbilltyTime == abiltyColdown && SkeltonNum < 4) {
                 ability(target);
                 lastAbilltyTime = System.currentTimeMillis();
                 lastAttackTime = System.currentTimeMillis();
@@ -39,8 +34,6 @@ public class Beserker extends FighterBase {
         }
         else {
 
-            }
-
-
+        }
     }
 }
