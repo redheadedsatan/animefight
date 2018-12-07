@@ -27,7 +27,6 @@ public class Console extends JFrame
     private final Dimension writeableSize;
     private int FOV_X;
     private int FOV_Y;
-    private boolean isFull = false;
 
     public Console(Dimension writeableSize, int FOV_X, int FOV_Y)
     {
@@ -63,9 +62,7 @@ public class Console extends JFrame
                 Display.put(p, Object.DIRT2);
             }
         }
-        //Document HTMLDocument;
         textArea.setText("");
-        isFull = false;
         for (int y = position.y - FOV_Y; y < position.y + FOV_Y; y++)
         {
             for (int x = position.x - FOV_X; x < position.x + FOV_X; x++)
@@ -75,46 +72,6 @@ public class Console extends JFrame
             }
             textArea.append("\n", Color.white);
         }
-        /*for (Map.Entry<Point, Object> entry : Display.entrySet())
-        {
-            if (Math.abs(entry.getKey().x - position.x) <= FOV_X &&
-                    Math.abs(entry.getKey().y - position.y) <= FOV_Y)
-            for (Object Char : colorChar)
-            {
-                if (Char == null)
-                {
-                    textArea.append(" ", Color.white);
-                    continue;
-                }
-                textArea.append(Char.getChar(), Char.getColor());
-            }
-            textArea.append("\n", Color.white);
-        }*/
-//        Lines = new Object[this.writeableSize.width][this.writeableSize.height];
         add(textArea);
-    }
-
-
-//    public void SetLocation(Point dim, Object obj)
-//    {
-//        try
-//        {
-//            Lines[dim.x][dim.y] = obj;
-//        }
-//        catch (Exception e)
-//        {
-//            System.err.println("You Probobly tried to enter invalid location");
-//        }
-//    }
-//
-//    public void FillLocation(Point dim, Size size, Object obj)
-//    {
-//        for ()
-//        Lines[dim.x][dim.y] = obj;
-//    }
-
-    public boolean isFull()
-    {
-        return isFull;
     }
 }
