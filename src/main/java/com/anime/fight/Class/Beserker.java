@@ -1,3 +1,4 @@
+
 package com.anime.fight.Class;
 
 import com.anime.fight.Class.Base.FighterBase;
