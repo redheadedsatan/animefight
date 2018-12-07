@@ -23,40 +23,17 @@ public class Main {
 
         UserInterface userInterface = new UserInterface();
         boolean exit = false;
-        final int width = 40;
-        final int height = 20;
-        Dimension windowSize = new Dimension(width, height);
-        final Console console;
-        console = new Console(windowSize);
-        console.setVisible(true);
 
         while (!exit)
         {
-            while (!console.isFull())
+            SwingUtilities.invokeAndWait(() ->
             {
-                SwingUtilities.invokeAndWait(() ->
-                {
-                    for (int y = 0; y < height; y++)
-                    {
-                        for (int x = 0; x < width; x++)
-                        {
-
-                            try {
-                                userInterface.Frame(console);
-                            } catch (Exception e) {
-                                System.err.println(e);
-                            }
-
-                        }
-                    }
-
-                    try {
-                        console.flush();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
+                try {
+                    userInterface.Frame();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
         }
 
         /*BasicEvents a = new BasicEvents() {
