@@ -1,5 +1,6 @@
 package com.anime.fight.UserInterface;
 
+import com.anime.fight.Util.ColorChar;
 import lombok.Getter;
 
 import java.awt.Color;
@@ -10,13 +11,13 @@ public enum Object
     DIRT('░', new Color(150, 75, 0));
 
     @Getter
-    private char Display;
+    private char Char;
     @Getter
     private Color color;
 
-    Object(char Display, Color color)
+    Object(char Char, Color color)
     {
-        this.Display =  Display;
+        this.Char =  Char;
         this.color =  color;
     }
 }

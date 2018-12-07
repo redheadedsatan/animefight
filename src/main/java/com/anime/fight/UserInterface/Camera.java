@@ -1,13 +1,15 @@
 package com.anime.fight.UserInterface;
 
+import com.anime.fight.Annotation.UserInterface;
 import com.anime.fight.Annotation.Subscribe;
-import com.anime.fight.event.BasicEvents;
+import com.anime.fight.event.BasicClassEvent;
+import com.anime.fight.event.OnFrame;
+import java.awt.Point;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.awt.*;
-
-public class Camera implements BasicEvents {
+@UserInterface
+public class Camera extends BasicClassEvent implements OnFrame {
     @Getter
     private Point position = new Point(0,0);
 
@@ -18,6 +20,6 @@ public class Camera implements BasicEvents {
 
     @Subscribe
     public void OnFrame() {
-        System.out.println("hi");
+
     }
 }
