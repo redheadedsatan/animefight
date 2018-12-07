@@ -1,9 +1,14 @@
 package com.anime.fight.Class;
 
 import com.anime.fight.Class.Base.FighterBase;
+import com.anime.fight.UserInterface.Object;
 
 public class Necromancer extends FighterBase {
     private int SkeltonNum = 0;
+    public Necromancer(){
+        super(Object.NECROMANCER);
+
+    }
     public void ability(FighterBase target) {
         for (int i = -2; i <= 2;i+=4)
         {
@@ -33,7 +38,19 @@ public class Necromancer extends FighterBase {
             }
         }
         else {
-
+            double A,B;
+            A = position.getX();
+            B = position.getY();
+            double m = (position.getY() - target.getPosition().getY())/Math.abs(position.getX() - target.getPosition().getX());
+            double dissX1 = ((2*m*(m*A + B) + Math.pow(Math.pow(2*m*(m*A + B),2) - 4 * ((m*m + 1)*Math.pow((m+A +B*B),2) - movmentSpeed*movmentSpeed),0.5))/
+                    2*(m*m +1));
+            double dissX2 = ((2*m*(m*A + B) + Math.pow(Math.pow(2*m*(m*A + B),2) - 4 * ((m*m + 1)*Math.pow((m+A +B*B),2) - movmentSpeed*movmentSpeed),0.5))/
+                    2*(m*m +1));
+            if (dissX1 - target.getPosition().getX() < dissX2 - target.getPosition().getX())
+                position.setLocation(A + dissX1,B + (m*dissX1 - (m*A + B)));
+            else
+                position.setLocation(A + dissX2,B + (m*dissX2 - (m*A + B)));
+        }
         }
     }
-}
+

@@ -49,6 +49,14 @@ public abstract class FighterBase implements FighterInterface
     protected int fighterLevel;
     private int exp;
 
+    public FighterBase(Object look)
+    {
+        this.Look = look;
+        isDead = false;
+        exp = 0;
+        fighterLevel = 1;
+    }
+
     public double critHit()
     {
         return baseDamage * 1.5;
@@ -81,5 +89,12 @@ public abstract class FighterBase implements FighterInterface
             target.defend(critHit());
         else
             target.defend(baseDamage);
+    }
+    public final double Heal(double Healed)
+    {
+        if (hp + Healed >= hpMax)
+            return hpMax;
+        else
+            return hp = Healed;
     }
 }
