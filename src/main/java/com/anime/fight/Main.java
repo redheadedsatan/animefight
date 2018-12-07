@@ -1,5 +1,6 @@
 package com.anime.fight;
 
+import com.anime.fight.Annotation.Subscribe;
 import com.anime.fight.UserInterface.Camera;
 import com.anime.fight.event.BasicEvents;
 import org.reflections.Reflections;
@@ -16,25 +17,19 @@ public class Main {
         };
         a.OnFrame();*/
 
-        List<BasicEvents> listeners = new ArrayList<BasicEvents>();
+        //List<Class<BasicEvents>> listeners = new ArrayList<Class<BasicEvents>>();
 
         Reflections reflections = new Reflections("com.anime.fight");
         Set<Class<? extends BasicEvents>> classes = reflections.getSubTypesOf(BasicEvents.class);
         for (Class<? extends BasicEvents> aClass : classes)
         {
-            listeners.add(aClass);
             for (Method m : aClass.getMethods())
             {
-                for (Method a : BasicEvents.class.getMethods())
+                if (m.isAnnotationPresent(Subscribe.class))
                 {
-                    if (m.getName().equals(a.getName())) {
-                        try {
-                            m.invoke(m, null);
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
-                        System.out.println(m.getName());
-                    }
+                    try {
+                        m.invoke(aClass.newInstance());
+                    } catch (Exception e) {}
                 }
             }
         }

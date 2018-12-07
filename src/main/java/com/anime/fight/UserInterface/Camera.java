@@ -1,5 +1,6 @@
 package com.anime.fight.UserInterface;
 
+import com.anime.fight.Annotation.Subscribe;
 import com.anime.fight.event.BasicEvents;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,7 @@ public class Camera implements BasicEvents {
     @Setter
     private double horizontalSpeed = 0;
 
+    @Subscribe
     public void OnFrame() {
         System.out.println("hi");
     }
