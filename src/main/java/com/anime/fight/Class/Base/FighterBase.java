@@ -1,14 +1,16 @@
 package com.anime.fight.Class.Base;
 
-import lombok.Getter;
-
-import java.awt.*;
+import com.anime.fight.UserInterface.Object;
+import java.awt.Point;
 import java.util.Random;
+import lombok.Getter;
 
 public abstract class FighterBase implements FighterInterface
 {
 
     private final double defenceMultiplayer = 10;
+    @Getter
+    protected Object Look;
     @Getter
     protected double lastAttackTime;
     @Getter
