@@ -8,8 +8,8 @@ import com.anime.fight.eventbus.Subscribe;
 @UserInterface
 public class test extends BasicClassEvent {
 
-    @Subscribe
-    public void onData(Data data)
+    //@Subscribe
+    //public void onData(Data data)
     {
         System.out.println("hi");
     }

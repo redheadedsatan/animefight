@@ -59,7 +59,7 @@ public class Console extends JFrame
                 {
                     continue;
                 }
-                Display.put(p, Object.DIRT2);
+                Display.put(p, Object.DIRT);
             }
         }
         textArea.setText("");

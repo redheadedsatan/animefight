@@ -2,6 +2,7 @@ package com.anime.fight.UserInterface;
 
 import com.anime.fight.Console;
 import com.anime.fight.LoadEvents;
+import com.anime.fight.Util.Plane;
 import com.anime.fight.event.BasicClassEvent;
 import com.anime.fight.event.Data;
 import com.anime.fight.eventbus.EventBus;
@@ -22,15 +23,16 @@ public class UserInterface extends Camera{
     private List<BasicClassEvent> basicClassEvents = new ArrayList<>();
 
     private final EventBus eventBus = new EventBus();
-    private Map<Point, Object> Display = new HashMap<>();
+    private Plane plane = new Plane();
     private final Dimension windowSize = new Dimension(width, height);
     private final Console console;
+    private int ZAxis = 0;
 
     public UserInterface()
     {
-        Display.put(new Point(1,1), Object.DIRT);
-        Display.put(new Point(3,2), Object.DIRT);
-        Display.put(new Point(6,3), Object.DIRT);
+        plane.setPointPlane(0, new Point(1,1), Object.STONE);
+        plane.setPointPlane(0, new Point(3,2), Object.STONE);
+        plane.setPointPlane(0, new Point(6,3), Object.STONE);
         console = new Console(windowSize, FOV_X, FOV_Y);
         console.setVisible(true);
         init();
@@ -56,15 +58,11 @@ public class UserInterface extends Camera{
         //Call every event that have OnFrame interface in it
         basicClassEvents.forEach((event) -> {
             eventBus.post(new Data(new Point(0,0)));
-//            try {
-//                ((OnFrame)event).OnFrame();
-//            } catch (Exception e) {
-//            }
             position.setLocation(i / 20, position.y);
             i++;
             System.out.println(i);
         });
 
-        console.flush(Display, position);
+        console.flush(plane.get(ZAxis), position);
     }
 }

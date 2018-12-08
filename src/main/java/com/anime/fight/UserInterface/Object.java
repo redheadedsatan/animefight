@@ -8,8 +8,20 @@ import java.awt.Point;
 
 public enum Object
 {
-    DIRT('░', new Color(150, 75, 0)),
-    DIRT2('░', new Color(150, 75, 150)),
+    // Interface
+    VER_LINE('║', Color.WHITE),
+    HOR_LINE('═', Color.WHITE),
+    NW_LINE('╔', Color.WHITE),
+    SW_LINE('╚', Color.WHITE),
+    NE_LINE('╗', Color.WHITE),
+    SE_LINE('╝', Color.WHITE),
+
+    // Environment
+    VOID(' ', new Color(0, 0, 0)),
+    DIRT(' ', new Color(150, 75, 0)),
+    STONE('▒', new Color(128,128,128)),
+
+    // Classes
     RANGER('R', new Color(0,200,0)),
     SKELETON('S', new Color(200,200,200)),
     CHARGER('C', new Color(100,100,0)),
