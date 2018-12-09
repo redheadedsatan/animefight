@@ -1,24 +1,23 @@
+package com.anime.fight.classes;
 
-package com.anime.fight.Class;
+import com.anime.fight.classes.base.FighterBase;
+import com.anime.fight.userInterface.Object;
 
-import com.anime.fight.Class.Base.FighterBase;
-import com.anime.fight.UserInterface.Object;
-import lombok.Getter;
+public class Charger extends FighterBase {
+    private double abiltDmgMod;
+    private double abiltyDash;
+    private double healMod;
 
-
-public class Ranger extends FighterBase {
-
-    public Ranger(){
-        super(Object.RANGER);
+    public Charger(){
+        super(Object.CHARGER);
 
     }
-    private double abiltyDash;
-    @Getter
-    protected double abiltDmgMod;
+    @Override
+    public double critHit() {
+        hp += Heal(healMod*hpMax);
+        return super.critHit();
+    }
 
-    /**
-     * shoots an arrow with lower dmg and move away from the target
-     */
     @Override
     public void ability(FighterBase target) {
         target.defend(baseDamage * abiltDmgMod);
@@ -30,39 +29,42 @@ public class Ranger extends FighterBase {
                 2 * (m * m + 1));
         double dissX2 = ((2 * m * (m * A + B) + Math.pow(Math.pow(2 * m * (m * A + B), 2) - 4 * ((m * m + 1) * Math.pow((m + A + B * B), 2) - abiltyDash * abiltyDash), 0.5)) /
                 2 * (m * m + 1));
-        if (dissX1 - target.getPosition().getX() > dissX2 - target.getPosition().getX())
+        if (dissX1 - target.getPosition().getX() < dissX2 - target.getPosition().getX())
             position.setLocation(A + dissX1, B + (m * dissX1 - (m * A + B)));
         else
             position.setLocation(A + dissX2, B + (m * dissX2 - (m * A + B)));
     }
+
     @Override
     public void logic(FighterBase[] targets) {
         FighterBase target = findCloseEnemy(targets);
         double diss = position.distance(target.getPosition());
-        if (diss <= baseRange && (System.currentTimeMillis() - lastAttackTime) == attackSpeed) {
+        if (diss <= baseRange && (System.currentTimeMillis() - lastAttackTime) == attackSpeed)
+        {
             if (System.currentTimeMillis() - lastAbilltyTime == abiltyColdown) {
                 ability(target);
                 lastAbilltyTime = System.currentTimeMillis();
                 lastAttackTime = System.currentTimeMillis();
-            } else {
+            }
+            else {
                 basicAttack(target);
                 lastAttackTime = System.currentTimeMillis();
             }
-        } else {
-            double A, B;
+        }
+        else {
+            double A,B;
             A = position.getX();
             B = position.getY();
-            double m = (position.getY() - target.getPosition().getY()) / Math.abs(position.getX() - target.getPosition().getX());
-            double dissX1 = ((2 * m * (m * A + B) + Math.pow(Math.pow(2 * m * (m * A + B), 2) - 4 * ((m * m + 1) * Math.pow((m + A + B * B), 2) - movmentSpeed * movmentSpeed), 0.5)) /
-                    2 * (m * m + 1));
-            double dissX2 = ((2 * m * (m * A + B) + Math.pow(Math.pow(2 * m * (m * A + B), 2) - 4 * ((m * m + 1) * Math.pow((m + A + B * B), 2) - movmentSpeed * movmentSpeed), 0.5)) /
-                    2 * (m * m + 1));
+            double m = (position.getY() - target.getPosition().getY())/Math.abs(position.getX() - target.getPosition().getX());
+            double dissX1 = ((2*m*(m*A + B) + Math.pow(Math.pow(2*m*(m*A + B),2) - 4 * ((m*m + 1)*Math.pow((m+A +B*B),2) - movmentSpeed*movmentSpeed),0.5))/
+                    2*(m*m +1));
+            double dissX2 = ((2*m*(m*A + B) + Math.pow(Math.pow(2*m*(m*A + B),2) - 4 * ((m*m + 1)*Math.pow((m+A +B*B),2) - movmentSpeed*movmentSpeed),0.5))/
+                    2*(m*m +1));
             if (dissX1 - target.getPosition().getX() > dissX2 - target.getPosition().getX())
-                position.setLocation(A + dissX1, B + (m * dissX1 - (m * A + B)));
+                position.setLocation(A + dissX1,B + (m*dissX1 - (m*A + B)));
             else
-                position.setLocation(A + dissX2, B + (m * dissX2 - (m * A + B)));
-
-
+                position.setLocation(A + dissX2,B + (m*dissX2 - (m*A + B)));
         }
+
     }
 }

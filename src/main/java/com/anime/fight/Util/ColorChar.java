@@ -1,4 +1,4 @@
-package com.anime.fight.Util;
+package com.anime.fight.util;
 
 import java.awt.Color;
 import lombok.Value;

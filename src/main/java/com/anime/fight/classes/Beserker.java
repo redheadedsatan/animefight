@@ -1,41 +1,32 @@
-package com.anime.fight.Class;
 
-import com.anime.fight.Class.Base.FighterBase;
-import com.anime.fight.UserInterface.Object;
+package com.anime.fight.classes;
 
-public class Charger extends FighterBase {
-    private double abiltDmgMod;
-    private double abiltyDash;
-    private double healMod;
+import com.anime.fight.classes.base.FighterBase;
+import com.anime.fight.userInterface.Object;
+import lombok.Getter;
 
-    public Charger(){
-        super(Object.CHARGER);
+
+public class Beserker extends FighterBase {
+
+    public Beserker(){
+        super(Object.BESERKER);
 
     }
-    @Override
-    public double critHit() {
-        hp += Heal(healMod*hpMax);
-        return super.critHit();
-    }
+    @Getter
+    protected double SelfDmgMinimum = 2;
 
-    @Override
     public void ability(FighterBase target) {
-        target.defend(baseDamage * abiltDmgMod);
-        double A, B;
-        A = position.getX();
-        B = position.getY();
-        double m = (position.getY() - target.getPosition().getY()) / Math.abs(position.getX() - target.getPosition().getX());
-        double dissX1 = ((2 * m * (m * A + B) + Math.pow(Math.pow(2 * m * (m * A + B), 2) - 4 * ((m * m + 1) * Math.pow((m + A + B * B), 2) - abiltyDash * abiltyDash), 0.5)) /
-                2 * (m * m + 1));
-        double dissX2 = ((2 * m * (m * A + B) + Math.pow(Math.pow(2 * m * (m * A + B), 2) - 4 * ((m * m + 1) * Math.pow((m + A + B * B), 2) - abiltyDash * abiltyDash), 0.5)) /
-                2 * (m * m + 1));
-        if (dissX1 - target.getPosition().getX() < dissX2 - target.getPosition().getX())
-            position.setLocation(A + dissX1, B + (m * dissX1 - (m * A + B)));
-        else
-            position.setLocation(A + dissX2, B + (m * dissX2 - (m * A + B)));
+        double selfDmg = hpMax*0.05;
+        if (SelfDmgMinimum > selfDmg) { selfDmg = SelfDmgMinimum; }
+        hp -= selfDmg;
+        if (hp <= 0)
+        {
+            hp = 1;
+        }
+        basicAttack(target);
+        basicAttack(target);
     }
 
-    @Override
     public void logic(FighterBase[] targets) {
         FighterBase target = findCloseEnemy(targets);
         double diss = position.distance(target.getPosition());
@@ -64,7 +55,8 @@ public class Charger extends FighterBase {
                 position.setLocation(A + dissX1,B + (m*dissX1 - (m*A + B)));
             else
                 position.setLocation(A + dissX2,B + (m*dissX2 - (m*A + B)));
-        }
+            }
+
 
     }
 }

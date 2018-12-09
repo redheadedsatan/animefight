@@ -1,6 +1,6 @@
 package com.anime.fight;
 
-import com.anime.fight.UserInterface.UserInterface;
+import com.anime.fight.userInterface.UserInterface;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Timer;
 import java.util.TimerTask;

@@ -1,6 +1,6 @@
-package com.anime.fight.Class.Base;
+package com.anime.fight.classes.base;
 
-import com.anime.fight.UserInterface.Object;
+import com.anime.fight.userInterface.Object;
 import java.awt.Point;
 import java.util.Random;
 import lombok.Getter;

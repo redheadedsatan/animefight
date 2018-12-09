@@ -1,4 +1,4 @@
-package com.anime.fight.Annotation;
+package com.anime.fight.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,5 +7,5 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE) //on class level
-    public @interface UserInterface {
+    public @interface EventActive {
 }

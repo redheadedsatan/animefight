@@ -1,4 +1,4 @@
-package com.anime.fight.Class.Base;
+package com.anime.fight.classes.base;
 
 public interface FighterInterface
 {
