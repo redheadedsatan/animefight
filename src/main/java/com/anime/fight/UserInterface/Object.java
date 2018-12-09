@@ -1,6 +1,6 @@
-package com.anime.fight.UserInterface;
+package com.anime.fight.userInterface;
 
-import com.anime.fight.Util.ColorChar;
+import com.anime.fight.util.ColorChar;
 import lombok.Getter;
 
 import java.awt.Color;
@@ -9,12 +9,12 @@ import java.awt.Point;
 public enum Object
 {
     // Interface
-    VER_LINE('║', Color.WHITE),
-    HOR_LINE('═', Color.WHITE),
-    NW_LINE('╔', Color.WHITE),
-    SW_LINE('╚', Color.WHITE),
-    NE_LINE('╗', Color.WHITE),
-    SE_LINE('╝', Color.WHITE),
+    VER_LINE('║', Color.WHITE, true),
+    HOR_LINE('═', Color.WHITE, true),
+    NW_LINE('╔', Color.WHITE, true),
+    SW_LINE('╚', Color.WHITE, true),
+    NE_LINE('╗', Color.WHITE, true),
+    SE_LINE('╝', Color.WHITE, true),
 
     // Environment
     VOID(' ', new Color(0, 0, 0)),
@@ -29,13 +29,25 @@ public enum Object
     BESERKER('B', new Color(200,0,0));
 
     @Getter
-    private char Char;
+    private final char Char;
     @Getter
-    private Color color;
+    private final Color color;
+    @Getter
+    private final boolean gui;
+
+    // TODO : maybe make other Enum with type parameters...
 
     Object(char Char, Color color)
     {
         this.Char =  Char;
         this.color =  color;
+        this.gui = false;
+    }
+
+    Object(char Char, Color color, boolean gui)
+    {
+        this.Char =  Char;
+        this.color =  color;
+        this.gui =  gui;
     }
 }

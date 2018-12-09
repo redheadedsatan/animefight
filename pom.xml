@@ -12,10 +12,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -41,6 +46,16 @@
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
             <version>3.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sonatype.sisu</groupId>
+            <artifactId>sisu-guice</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sonatype.sisu</groupId>
+            <artifactId>sisu-inject-bean</artifactId>
+            <version>1.4.2</version>
         </dependency>
     </dependencies>
 

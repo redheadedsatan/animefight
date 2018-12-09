@@ -1,25 +1,19 @@
-package com.anime.fight.Class;
+package com.anime.fight.classes;
 
-import com.anime.fight.Class.Base.FighterBase;
-import com.anime.fight.UserInterface.Object;
+import com.anime.fight.classes.base.FighterBase;
+import com.anime.fight.userInterface.Object;
 
-public class Necromancer extends FighterBase {
-    private int SkeltonNum = 0;
-    public Necromancer(){
-        super(Object.NECROMANCER);
+public class Skeleton extends FighterBase {
+    private double abilityRange;
+    private double expHp;
+    public Skeleton(){
+        super(Object.SKELETON);
 
     }
     public void ability(FighterBase target) {
-        for (int i = -2; i <= 2;i+=4)
-        {
-            for (int j = -2; j <= 2; j+=4){
-                if(SkeltonNum < 4) {
-                    Skeleton a = new Skeleton();
-                    SkeltonNum++;
-                }
-            }
-        }
-
+        hp = 0;
+        target.defend(baseDamage * 2);
+        isDead = true;
     }
 
     public void logic(FighterBase[] targets) {
@@ -27,11 +21,9 @@ public class Necromancer extends FighterBase {
         double diss = position.distance(target.getPosition());
         if (diss <= baseRange && (System.currentTimeMillis() - lastAttackTime) == attackSpeed)
         {
-            if (System.currentTimeMillis() - lastAbilltyTime == abiltyColdown && SkeltonNum < 4) {
+            if (hp < expHp) {
                 ability(target);
-                lastAbilltyTime = System.currentTimeMillis();
-                lastAttackTime = System.currentTimeMillis();
-            }
+                }
             else {
                 basicAttack(target);
                 lastAttackTime = System.currentTimeMillis();
@@ -46,11 +38,11 @@ public class Necromancer extends FighterBase {
                     2*(m*m +1));
             double dissX2 = ((2*m*(m*A + B) + Math.pow(Math.pow(2*m*(m*A + B),2) - 4 * ((m*m + 1)*Math.pow((m+A +B*B),2) - movmentSpeed*movmentSpeed),0.5))/
                     2*(m*m +1));
-            if (dissX1 - target.getPosition().getX() < dissX2 - target.getPosition().getX())
+            if (dissX1 - target.getPosition().getX() > dissX2 - target.getPosition().getX())
                 position.setLocation(A + dissX1,B + (m*dissX1 - (m*A + B)));
             else
                 position.setLocation(A + dissX2,B + (m*dissX2 - (m*A + B)));
-        }
+
         }
     }
-
+}
