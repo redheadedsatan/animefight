@@ -1,26 +1,57 @@
 package com.anime.fight;
 
-import com.anime.fight.userInterface.UserInterface;
+import com.anime.fight.api.eventbus.EventBus;
+import com.anime.fight.game.userInterface.UserInterface;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.inject.Inject;
 import javax.swing.SwingUtilities;
+import lombok.Getter;
 
-public class Main {
+public class Main
+{
+
+    @Getter
+    private static Injector injector;
+    @Inject
+    private UserInterface userInterface;
+    @Inject
+    private EventBus eventBus;
+
+    private static final String ClassPath = "com.anime.fight.game";
+    private static int FrameRate = 0;
 
     public static void main(String[] args) {
 
+        injector = Guice.createInjector(new LoadModule());
 
-        UserInterface userInterface = new UserInterface();
+        injector.getInstance(Main.class).start();
+    }
+
+    public void start()
+    {
+        injector.injectMembers(userInterface);
+        userInterface.startUp();
         boolean exit = false;
 
         Timer frame = new Timer();
         frame.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                System.out.println("FrameRate = " + FrameRate);
+                FrameRate = 0;
+            }
+        }, 0, 1000);
+
+        new Thread(() -> {
+            while (true)
+            {
                 if (exit)
                 {
-                    frame.cancel();
+                    return;
                 }
 
                 try {
@@ -37,7 +68,8 @@ public class Main {
                 } catch (InvocationTargetException e) {
                     e.printStackTrace();
                 }
+                FrameRate++;
             }
-        }, 0, 50);
+        }).run();
     }
 }
