@@ -58,6 +58,7 @@ public class Console extends JFrame
 
     private void textAreaChanged()
     {
+        textArea.requestFocusInWindow();
         pack();
     }
 

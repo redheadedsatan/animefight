@@ -6,12 +6,12 @@ import com.anime.fight.api.eventbus.Subscribe;
 import com.anime.fight.game.event.BasicActiveClass;
 import com.anime.fight.game.event.ConsoleCreate;
 import com.anime.fight.game.event.EventBusFinishedInit;
+import com.anime.fight.game.event.Frame;
 import com.anime.fight.game.event.KeyClicked;
-import com.anime.fight.game.event.PlaneChange;
 import com.anime.fight.game.userInterface.Console;
 import java.awt.Point;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import lombok.Getter;
 
 @EventActive
@@ -37,7 +37,9 @@ public class MouseTrigger extends BasicActiveClass {
     public void onConsoleCreate(ConsoleCreate console)
     {
         this.console = console.getConsole();
-        this.console.getTextArea().addKeyListener(new KeyListener() {
+//        this.console.getTextArea().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("U"),"UString");
+//        this.console.getTextArea().getActionMap().put("UString", a);
+        this.console.getTextArea().addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
 //                System.out.println("hi");
@@ -73,7 +75,6 @@ public class MouseTrigger extends BasicActiveClass {
                 {
                     verticalSpeed += dy;
                 }
-
                 eventBus.post(new KeyClicked(verticalSpeed, horizontalSpeed));
             }
 
@@ -96,8 +97,7 @@ public class MouseTrigger extends BasicActiveClass {
                 {
                     horizontalSpeed = 0;
                 }
-
-                eventBus.post(new KeyClicked(0, 0));
+                eventBus.post(new KeyClicked(verticalSpeed, horizontalSpeed));
             }
         });
     }
@@ -115,7 +115,7 @@ public class MouseTrigger extends BasicActiveClass {
     }
 
     @Subscribe
-    public void onPlaneChange(PlaneChange planeChange)
+    public void onFrame(Frame frame)
     {
 //        System.out.println("hi");
     }
