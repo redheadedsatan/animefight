@@ -7,5 +7,6 @@ import lombok.Data;
 
 @Data
 public class Frame {
+    private final Point mousePos;
     private final Map<Point, Object> event;
 }

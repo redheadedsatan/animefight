@@ -38,7 +38,7 @@ public class TreeMapExtended extends TreeMap<Integer, Map<Point, Object>>
         Map<Point, Object> pl = get(Z);
         if (pl == null)
         {
-            pl = new HashMap<>();
+            pl = new TreeMap<>();
         }
         pl.put(point, obj);
         put(Z, pl);
