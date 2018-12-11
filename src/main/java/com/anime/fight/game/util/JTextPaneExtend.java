@@ -14,9 +14,9 @@ public class JTextPaneExtend extends JTextPane {
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,
                 StyleConstants.Foreground, color);
 
-        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
-        aset = sc.addAttribute(aset, StyleConstants.Alignment,
-                StyleConstants.ALIGN_JUSTIFIED);
+//        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+//        aset = sc.addAttribute(aset, StyleConstants.Alignment,
+//                StyleConstants.ALIGN_JUSTIFIED);
 
         int len = getDocument().getLength();
         setCaretPosition(len);
@@ -35,8 +35,15 @@ public class JTextPaneExtend extends JTextPane {
                 StyleConstants.ALIGN_JUSTIFIED);
 
         int len = getDocument().getLength();
+//        try {
+//            getDocument().insertString(len, String.valueOf(str), aset);
+//        } catch (BadLocationException e) {
+//            e.printStackTrace();
+//        }
         setCaretPosition(len);
         setCharacterAttributes(aset, false);
         replaceSelection(String.valueOf(str));
     }
+
+
 }

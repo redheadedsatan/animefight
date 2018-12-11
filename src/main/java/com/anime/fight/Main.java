@@ -38,6 +38,7 @@ public class Main
         boolean exit = false;
 
         Timer frame = new Timer();
+        Timer frame2 = new Timer();
         frame.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -46,9 +47,9 @@ public class Main
             }
         }, 0, 1000);
 
-        new Thread(() -> {
-            while (true)
-            {
+        frame2.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
                 if (exit)
                 {
                     return;
@@ -70,6 +71,6 @@ public class Main
                 }
                 FrameRate++;
             }
-        }).run();
+        }, 0, 50);
     }
 }

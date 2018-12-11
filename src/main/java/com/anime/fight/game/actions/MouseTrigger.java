@@ -4,10 +4,11 @@ import com.anime.fight.api.annotation.EventActive;
 import com.anime.fight.api.eventbus.EventBus;
 import com.anime.fight.api.eventbus.Subscribe;
 import com.anime.fight.game.event.BasicActiveClass;
+import com.anime.fight.game.event.CameraCreated;
 import com.anime.fight.game.event.ConsoleCreate;
 import com.anime.fight.game.event.EventBusFinishedInit;
-import com.anime.fight.game.event.Frame;
 import com.anime.fight.game.event.KeyClicked;
+import com.anime.fight.game.interfaces.Camera;
 import com.anime.fight.game.userInterface.Console;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
@@ -23,6 +24,8 @@ public class MouseTrigger extends BasicActiveClass {
     private Point position;
     @Getter
     private EventBus eventBus;
+    @Getter
+    private Camera camera;
 
     private double verticalSpeed = 0;
     private double horizontalSpeed = 0;
@@ -31,6 +34,12 @@ public class MouseTrigger extends BasicActiveClass {
     protected void startUp() throws Exception {
         position = new Point(0, 0);
 //        console = userInterface.getConsole();
+    }
+
+    @Subscribe
+    public void onCameraCreated(CameraCreated camera)
+    {
+        this.camera = camera.getCamera();
     }
 
     @Subscribe
@@ -67,15 +76,15 @@ public class MouseTrigger extends BasicActiveClass {
                     dx = -0.51;
                 }
 
-                if (horizontalSpeed < 2 && horizontalSpeed > -2)
+                if (horizontalSpeed < 2.4 && horizontalSpeed > -2.4)
                 {
                     horizontalSpeed += dx;
                 }
-                if (verticalSpeed < 2 && verticalSpeed > -2)
+                if (verticalSpeed < 2.4 && verticalSpeed > -2.4)
                 {
                     verticalSpeed += dy;
                 }
-                eventBus.post(new KeyClicked(verticalSpeed, horizontalSpeed));
+                eventBus.post(new KeyClicked(e, verticalSpeed, horizontalSpeed));
             }
 
             @Override
@@ -97,7 +106,7 @@ public class MouseTrigger extends BasicActiveClass {
                 {
                     horizontalSpeed = 0;
                 }
-                eventBus.post(new KeyClicked(verticalSpeed, horizontalSpeed));
+                eventBus.post(new KeyClicked(e, verticalSpeed, horizontalSpeed));
             }
         });
     }
@@ -113,10 +122,24 @@ public class MouseTrigger extends BasicActiveClass {
     {
         eventBus = event.getEventBus();
     }
-
-    @Subscribe
-    public void onFrame(Frame frame)
-    {
-//        System.out.println("hi");
-    }
+//
+//    @Subscribe
+//    public void onFrame(Frame frame)
+//    {
+//        int a = (camera.getFOV_X() * 2);
+//        int b = a - 10;
+//        double c = (double)b / (double)(camera.getFOV_X() * 2);
+//        int d = (int)(c * console.getTextArea().getSize().width + this.console.getTextArea().getLocationOnScreen().x);
+//
+//        int x = d;
+//        a = (camera.getFOV_Y() * 2);
+//        b = a - 10;
+//        c = (double)b / (double)(camera.getFOV_Y() * 2);
+//        d = (int)(c * console.getTextArea().getSize().height + this.console.getTextArea().getLocationOnScreen().y);
+//
+//        int y = d;
+//        Point point = new Point(MouseInfo.getPointerInfo().getLocation().x - x,
+//                                MouseInfo.getPointerInfo().getLocation().y - y);
+//        System.out.println(point);
+//    }
 }
