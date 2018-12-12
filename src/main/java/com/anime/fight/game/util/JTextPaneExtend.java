@@ -14,9 +14,9 @@ public class JTextPaneExtend extends JTextPane {
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,
                 StyleConstants.Foreground, color);
 
-//        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
-//        aset = sc.addAttribute(aset, StyleConstants.Alignment,
-//                StyleConstants.ALIGN_JUSTIFIED);
+        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+        aset = sc.addAttribute(aset, StyleConstants.Alignment,
+                StyleConstants.ALIGN_JUSTIFIED);
 
         int len = getDocument().getLength();
         setCaretPosition(len);
