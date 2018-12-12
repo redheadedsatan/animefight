@@ -30,10 +30,10 @@ public class Plane extends TreeMapExtended {
     }
 
     @Override
-    protected void _fillPlaneRandom(int Z, Point upperLeft, Point downRight, Object[] obj, boolean override) {
+    protected void _fillPlaneRandom(int Z, Point upperLeft, Point downRight, Weight[] W, boolean override) {
         clear();
         TreeMapExtended p = this;
-        super._fillPlaneRandom(Z, upperLeft, downRight, obj, override);
+        super._fillPlaneRandom(Z, upperLeft, downRight, W, override);
         eventBus.post(new PlaneChange(this, p));
     }
 

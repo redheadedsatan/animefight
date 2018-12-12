@@ -20,6 +20,11 @@ public class TreeMapExtended extends TreeMap<Integer, Map<Point, Object>>
 
     private final int offsetY = 1000000;
 
+    private int calculateSeed(Point point)
+    {
+        return calculateSeed(point.x, point.y);
+    }
+
     private int calculateSeed(int x, int y)
     {
         return seed + y * offsetY + x;
@@ -55,14 +60,14 @@ public class TreeMapExtended extends TreeMap<Integer, Map<Point, Object>>
         _fillPlane(Z, upperLeft, downRight, obj, override);
     }
 
-    public void fillPlaneRandom(int Z, Point upperLeft, Point downRight, Object[] obj)
+    public void fillPlaneRandom(int Z, Point upperLeft, Point downRight, Weight[] W)
     {
-        _fillPlaneRandom(Z, upperLeft, downRight, obj, true);
+        _fillPlaneRandom(Z, upperLeft, downRight, W, true);
     }
 
-    public void fillPlaneRandom(int Z, Point upperLeft, Point downRight, Object[] obj, boolean override)
+    public void fillPlaneRandom(int Z, Point upperLeft, Point downRight, Weight[] W, boolean override)
     {
-        _fillPlaneRandom(Z, upperLeft, downRight, obj, override);
+        _fillPlaneRandom(Z, upperLeft, downRight, W, override);
     }
 
     protected void _fillPlane(int Z, Point upperLeft, Point downRight, Object obj, boolean override)
@@ -86,8 +91,13 @@ public class TreeMapExtended extends TreeMap<Integer, Map<Point, Object>>
 //        eventBus.post(new PlaneChange(this, p));
     }
 
-    protected void _fillPlaneRandom(int Z, Point upperLeft, Point downRight, Object[] obj, boolean override)
+    protected void _fillPlaneRandom(int Z, Point upperLeft, Point downRight, Weight[] W, boolean override)
     {
+        int max = 1;
+        for (Weight weight : W)
+        {
+            max += weight.getWeight();
+        }
 //        TreeMapExtended p = this;
         for (int y = upperLeft.y; y <= downRight.y; y++)
         {
@@ -97,16 +107,31 @@ public class TreeMapExtended extends TreeMap<Integer, Map<Point, Object>>
                 ifNull(Z);
                 Object o = get(Z).get(point);
                 if (o == null) {}
-                else if (!override && obj != null)
+                else if (!override)
                 {
                     continue;
                 }
-                Random r = new Random(calculateSeed(x, y));
-                int num = r.nextInt(obj.length);
-                get(Z).put(point, obj[num]);
+                Object obj = getObjFromWeight(W, point, max);
+                get(Z).put(point, obj);
             }
         }
 //        eventBus.post(new PlaneChange(this, p));
+    }
+
+    protected Object getObjFromWeight(Weight[] W, Point point, int max)
+    {
+        Random r = new Random(calculateSeed(point));
+        int randomNum = r.nextInt(max);
+        int nowNum = 0;
+        for (Weight weight : W)
+        {
+            nowNum += weight.getWeight();
+            if (randomNum <= nowNum)
+            {
+                return weight.getObj();
+            }
+        }
+        return Object.NULL;
     }
 
     protected void ifNull(int Z)

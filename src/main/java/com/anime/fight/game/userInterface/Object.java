@@ -5,6 +5,8 @@ import lombok.Getter;
 
 public enum Object
 {
+    NULL('█', new Color(255,20,147)),
+
     // Interface
     VER_LINE('║', Color.WHITE, true),
     HOR_LINE('═', Color.WHITE, true),

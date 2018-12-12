@@ -11,6 +11,7 @@ import com.anime.fight.game.event.KeyClicked;
 import com.anime.fight.game.event.LoadEvents;
 import com.anime.fight.game.interfaces.Camera;
 import com.anime.fight.game.util.Plane;
+import com.anime.fight.game.util.Weight;
 import com.google.inject.Injector;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -55,8 +56,8 @@ public class UserInterface implements Camera {
         console = new Console(FOV_X, FOV_Y);
         console.setVisible(true);
         plane = new Plane(seed, eventBus);
-        plane.fillPlaneRandom(ZAxis, new Point(-50, -50), new Point(50, 50),
-                new Object[] {Object.DIRT, Object.DIRT, Object.STONE});
+//        plane.fillPlaneRandom(ZAxis, new Point(-50, -50), new Point(50, 50),
+//                new Object[] {Object.DIRT, Object.DIRT, Object.STONE});
         events = new LoadEvents(eventBus);
         try
         {
@@ -104,7 +105,9 @@ public class UserInterface implements Camera {
     {
         plane.fillPlaneRandom(ZAxis, new Point(position.x - FOV_X, position.y - FOV_Y),
                 new Point(position.x + FOV_X, position.y + FOV_Y),
-                new Object[] {Object.DIRT, Object.DIRT, Object.STONE}, false);
+                new Weight[] {
+                        new Weight(4, Object.DIRT),
+                        new Weight(1, Object.STONE)}, false);
         plane.guiMakeBox(ZAxis, topLeft(), bottomRight());
 
         plane.getGui().fillPlane(ZAxis + 1, new Point(bottomRight().x - 10, bottomRight().y - 10),
