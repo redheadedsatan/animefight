@@ -2,6 +2,7 @@ package com.anime.fight.game.util;
 
 import com.anime.fight.api.eventbus.EventBus;
 import com.anime.fight.game.event.PlaneChange;
+import com.anime.fight.game.userInterface.CustomObject;
 import com.anime.fight.game.userInterface.Object;
 import java.awt.Point;
 import java.util.HashMap;
@@ -14,15 +15,7 @@ public class Plane extends TreeMapExtended {
     private TreeMapExtended gui;
 
     @Override
-    protected void setPointPlane(int Z, Point point, Object obj) {
-        clear();
-        TreeMapExtended p = this;
-        super.setPointPlane(Z, point, obj);
-        eventBus.post(new PlaneChange(this, p));
-    }
-
-    @Override
-    protected void _fillPlane(int Z, Point upperLeft, Point downRight, Object obj, boolean override) {
+    protected void _fillPlane(int Z, Point upperLeft, Point downRight, CustomObject obj, boolean override) {
         clear();
         TreeMapExtended p = this;
         super._fillPlane(Z, upperLeft, downRight, obj, override);
@@ -37,9 +30,9 @@ public class Plane extends TreeMapExtended {
         eventBus.post(new PlaneChange(this, p));
     }
 
-    public Map<Point, Object> getFlatPlane()
+    public Map<Point, CustomObject> getFlatPlane()
     {
-        Map<Point, Object> localPlane = new HashMap<>();
+        Map<Point, CustomObject> localPlane = new HashMap<>();
         gui.forEach((ZAxis, plane) -> {
             plane.forEach((point, obj) ->
             {

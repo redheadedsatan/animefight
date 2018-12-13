@@ -60,27 +60,27 @@ public class MouseTrigger extends BasicActiveClass {
                 double dy = 0;
                 if (e.getKeyCode() == KeyEvent.VK_S)
                 {
-                    dy = 0.51;
+                    dy += 1;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_W)
                 {
-                    dy = -0.51;
+                    dy -= 1;
                 }
 
                 if (e.getKeyCode() == KeyEvent.VK_D)
                 {
-                    dx = 0.51;
+                    dx += 1;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_A)
                 {
-                    dx = -0.51;
+                    dx -= 1;
                 }
 
-                if (horizontalSpeed < 2.4 && horizontalSpeed > -2.4)
+                if (horizontalSpeed < 1.1 && horizontalSpeed > -1.1)
                 {
                     horizontalSpeed += dx;
                 }
-                if (verticalSpeed < 2.4 && verticalSpeed > -2.4)
+                if (verticalSpeed < 1.1 && verticalSpeed > -1.1)
                 {
                     verticalSpeed += dy;
                 }
