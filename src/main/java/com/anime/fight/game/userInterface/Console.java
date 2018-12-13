@@ -1,7 +1,6 @@
 package com.anime.fight.game.userInterface;
 
 import com.anime.fight.game.util.JTextPaneExtend;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -27,7 +26,7 @@ public class Console extends JFrame
     private final JTextPaneExtend textArea;
     private int FOV_X;
     private int FOV_Y;
-    private Map<Point, Object> oldDisplay;
+    private Map<Point, CustomObject> oldDisplay;
     private final Style mainStyle;
 
     public Console(int FOV_X, int FOV_Y)
@@ -47,16 +46,17 @@ public class Console extends JFrame
         textArea.setForeground(Color.LIGHT_GRAY);
         textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 //        textArea.setContentType("text/html");
+        textArea.setHighlighter(null);
         textArea.setEditable(false);
 //        textArea.setEnabled(false);
-        add(textArea, BorderLayout.CENTER);
+        add(textArea);
         textArea.setText("");
         mainStyle = textArea.getLogicalStyle();
         StyleConstants.setFontFamily(mainStyle, "Lucida Console");
         StyleConstants.setAlignment(mainStyle, StyleConstants.ALIGN_JUSTIFIED);
         pack();
     }
-    public void flush(Map<Point, Object> Display, Point position) throws InterruptedException
+    public void flush(Map<Point, CustomObject> Display, Point position) throws InterruptedException
     {
 //        long time_1 = System.currentTimeMillis();
         if (Display.equals(oldDisplay))
@@ -70,7 +70,6 @@ public class Console extends JFrame
          */
         StringBuilder SB = new StringBuilder();
         textArea.setEditable(true);
-        textArea.setText("");
         Queue<Color> colors = new LinkedList();
         List<Color> AllColors = new ArrayList<>();
         for (int y = position.y - FOV_Y; y < position.y + FOV_Y; y++)
@@ -87,7 +86,7 @@ public class Console extends JFrame
             for (int x = position.x - FOV_X; x < position.x + FOV_X; x++)
             {
                 Point point = new Point(x, y);
-                Object obj = Display.get(point);
+                CustomObject obj = Display.get(point);
                 if (obj == null) { continue; }
                 SB.append(obj.getChar());
                 colors.add(obj.getColor());
