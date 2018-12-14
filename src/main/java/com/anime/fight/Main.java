@@ -71,6 +71,6 @@ public class Main
                 }
                 FrameRate++;
             }
-        }, 0, 20);
+        }, 0, 1);
     }
 }

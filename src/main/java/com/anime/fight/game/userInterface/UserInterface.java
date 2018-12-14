@@ -30,15 +30,15 @@ public class UserInterface implements Camera {
     private LoadEvents events;
 
     @Getter
-    Point position;
+    Point.Double position;
     @Getter
     double verticalSpeed = 0;
     @Getter
     double horizontalSpeed = 0;
     @Getter
-    int FOV_X = 40;
+    int FOV_X = 30;
     @Getter
-    int FOV_Y = 20;
+    int FOV_Y = 30;
     @Getter
     private Console console;
 
@@ -88,7 +88,7 @@ public class UserInterface implements Camera {
         eventBus.post(new EventBusFinishedInit(eventBus));
         eventBus.post(new CameraCreated(this));
         injector.injectMembers(MouseTrigger.class);
-        position = new Point(0,0);
+        position = new Point.Double(0,0);
 
         btns.put(0, new button(0, "cli ck", new Point(0,0), new Dimension("cli ck".length(), 1), Color.RED, console));
         btns.put(1, new button(1, "try me!", new Point(0,0), new Dimension("try me!".length(), 1), Color.BLUE, console));
@@ -119,8 +119,8 @@ public class UserInterface implements Camera {
     }
     private void createFrame()
     {
-        plane.fillPlaneRandom(ZAxis, new Point(position.x - FOV_X, position.y - FOV_Y),
-                new Point(position.x + FOV_X, position.y + FOV_Y),
+        plane.fillPlaneRandom(ZAxis, new Point((int)position.x - FOV_X, (int)position.y - FOV_Y),
+                new Point((int)position.x + FOV_X, (int)position.y + FOV_Y),
                 new Weight[] {
                         new Weight(4, Object.DIRT),
                         new Weight(1, Object.STONE)}, false);
@@ -134,7 +134,7 @@ public class UserInterface implements Camera {
         btns.get(1).setLocation(bottomRight().x - 9, bottomRight().y - 3);
         btns.forEach((index, btn) ->
         {
-            btn.setOffSet(position);
+            btn.setOffSet(new Point((int)position.x, (int)position.y));
             plane.getGui().setPointPlane(ZAxis,
                     btn.getLocation(),
                     btn.getDimension(), btn.getObjects());
@@ -143,10 +143,10 @@ public class UserInterface implements Camera {
 
     private Point topLeft()
     {
-        return new Point(position.x - FOV_X, position.y - FOV_Y);
+        return new Point((int)position.x - FOV_X, (int)position.y - FOV_Y);
     }
     private Point bottomRight()
     {
-        return new Point(position.x + FOV_X, position.y + FOV_Y);
+        return new Point((int)position.x + FOV_X, (int)position.y + FOV_Y);
     }
 }

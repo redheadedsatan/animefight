@@ -35,13 +35,13 @@ public abstract class baseGui
         double a = (camera.getFOV_X() * 2);
         double b = camera.getFOV_X() + location.x - offSet.x + dimension.width;
         double c = b / a;
-        int d = (int)(c * console.getTextArea().getSize().width + console.getTextArea().getLocationOnScreen().x);
+        int d = (int)(c * console.getCanvas().getSize().width + console.getCanvas().getLocationOnScreen().x);
 
         int x = d;
         a = (camera.getFOV_Y() * 2);
         b = camera.getFOV_Y() + location.y - offSet.y + dimension.height;
         c = b / a;
-        d = (int)(c * console.getTextArea().getSize().height + console.getTextArea().getLocationOnScreen().y);
+        d = (int)(c * console.getCanvas().getSize().height + console.getCanvas().getLocationOnScreen().y);
 
         int y = d;
         Point downRight = new Point(x,
