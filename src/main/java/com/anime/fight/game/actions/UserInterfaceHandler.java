@@ -34,13 +34,13 @@ public class UserInterfaceHandler extends BasicActiveClass
         int a = (camera.getFOV_X() * 2);
         int b = a - 10;
         double c = (double)b / (double)(camera.getFOV_X() * 2);
-        int d = (int)(c * console.getTextArea().getSize().width + this.console.getTextArea().getLocationOnScreen().x);
+        int d = (int)(c * console.getCanvas().getSize().width + this.console.getCanvas().getLocationOnScreen().x);
 
         int x = d;
         a = (camera.getFOV_Y() * 2);
         b = a - 10;
         c = (double)b / (double)(camera.getFOV_Y() * 2);
-        d = (int)(c * console.getTextArea().getSize().height + this.console.getTextArea().getLocationOnScreen().y);
+        d = (int)(c * console.getCanvas().getSize().height + this.console.getCanvas().getLocationOnScreen().y);
 
         int y = d;
         Point point = new Point(mousePos.x - x,

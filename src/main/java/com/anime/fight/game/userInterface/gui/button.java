@@ -51,7 +51,7 @@ public class button extends baseGui
                 System.out.println("Clicked On : \"" + str + "\"");
             }
         };
-        this.console.getTextArea().addMouseListener(mouseAdapter);
+        this.console.getCanvas().addMouseListener(mouseAdapter);
     }
 
     public boolean onMe()
@@ -84,13 +84,13 @@ public class button extends baseGui
         double a = (camera.getFOV_X() * 2);
         double b = camera.getFOV_X() + location.x - offSet.x ;
         double c = b / a;
-        int d = (int)(c * console.getTextArea().getSize().width + console.getTextArea().getLocationOnScreen().x);
+        int d = (int)(c * console.getCanvas().getSize().width + console.getCanvas().getLocationOnScreen().x);
 
         int x = d;
         a = (camera.getFOV_Y() * 2);
         b = camera.getFOV_Y() + location.y - offSet.y;
         c = b / a;
-        d = (int)(c * console.getTextArea().getSize().height + console.getTextArea().getLocationOnScreen().y);
+        d = (int)(c * console.getCanvas().getSize().height + console.getCanvas().getLocationOnScreen().y);
 
         int y = d;
         Point point = new Point(x,
@@ -103,13 +103,13 @@ public class button extends baseGui
                 return;
             }
             cursor = new Cursor(Cursor.HAND_CURSOR);
-            console.getTextArea().setCursor(cursor);
+            console.getCanvas().setCursor(cursor);
 
         }
         else if (cursor.getType() != Cursor.DEFAULT_CURSOR)
         {
             cursor = new Cursor(Cursor.DEFAULT_CURSOR);
-            console.getTextArea().setCursor(cursor);
+            console.getCanvas().setCursor(cursor);
         }
 //        System.out.println(point);
     }

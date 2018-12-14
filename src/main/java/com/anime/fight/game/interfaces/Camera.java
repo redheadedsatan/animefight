@@ -5,7 +5,7 @@ import java.awt.Point;
 
 public interface Camera
 {
-    Point getPosition();
+    Point.Double getPosition();
     double getVerticalSpeed();
     double getHorizontalSpeed();
     Console getConsole();

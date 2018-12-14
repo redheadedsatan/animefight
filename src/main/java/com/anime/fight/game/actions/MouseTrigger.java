@@ -48,7 +48,7 @@ public class MouseTrigger extends BasicActiveClass {
         this.console = console.getConsole();
 //        this.console.getTextArea().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("U"),"UString");
 //        this.console.getTextArea().getActionMap().put("UString", a);
-        this.console.getTextArea().addKeyListener(new KeyAdapter() {
+        this.console.getCanvas().addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
 //                System.out.println("hi");
@@ -56,33 +56,22 @@ public class MouseTrigger extends BasicActiveClass {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                double dx = 0;
-                double dy = 0;
                 if (e.getKeyCode() == KeyEvent.VK_S)
                 {
-                    dy += 1;
+                    verticalSpeed = 0.1;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_W)
                 {
-                    dy -= 1;
+                    verticalSpeed = -0.1;
                 }
 
                 if (e.getKeyCode() == KeyEvent.VK_D)
                 {
-                    dx += 1;
+                    horizontalSpeed = 0.1;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_A)
                 {
-                    dx -= 1;
-                }
-
-                if (horizontalSpeed < 1.1 && horizontalSpeed > -1.1)
-                {
-                    horizontalSpeed += dx;
-                }
-                if (verticalSpeed < 1.1 && verticalSpeed > -1.1)
-                {
-                    verticalSpeed += dy;
+                    horizontalSpeed = -0.1;
                 }
                 eventBus.post(new KeyClicked(e, verticalSpeed, horizontalSpeed));
             }
